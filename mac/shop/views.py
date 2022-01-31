@@ -17,3 +17,19 @@ def index(request):
         allprods.append([product, range(1, nSlides), nSlides])
     params = {'all_prods': allprods}
     return render(request, 'shop/index.html', params)
+
+
+def About(request):
+    return render(request, 'shop/about.html')
+
+def tracker(request):
+    return render(request, 'shop/tracker.html')
+
+
+def products(request, myid):
+    product = Product.objects.filter(id=myid)
+    return render(request, 'shop/product.html', {'product': product})
+
+
+def contact(request):
+    return render(request, 'shop/contact.html')

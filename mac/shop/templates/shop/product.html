@@ -1,0 +1,17 @@
+{% extends "shop/Basic.html" %}
+{% block title %} {{product.product_name}}| My Awesome Cart {% endblock %}
+{% block body %}
+{% load static %}
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <h2> {{product.product_name}} </h2>
+            <img src="{static '/media/shop/image'}" alt="{{product.product_name}}">
+        </div>
+        <div class="row">
+            <h2> {{product.product_name}} </h2>
+            <h4> {{product.price}} </h4>
+            <h5> {{product.desc}} </h5>
+        </div>
+    </div>
+</div>
