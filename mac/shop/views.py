@@ -22,13 +22,16 @@ def index(request):
 def About(request):
     return render(request, 'shop/about.html')
 
+
 def tracker(request):
     return render(request, 'shop/tracker.html')
 
 
 def products(request, myid):
     product = Product.objects.filter(id=myid)
-    return render(request, 'shop/product.html', {'product': product})
+    print(myid)
+    print(product)
+    return render(request, 'shop/product.html', {'products': product[0]})
 
 
 def contact(request):

@@ -30,10 +30,10 @@
           <a class="nav-link" href="http://127.0.0.1:8000/shop/">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
+          <a class="nav-link" href="/shop/About">About Us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/shop/Tracker">Tracker</a>
+          <a class="nav-link" href="/shop/tracker">Tracker</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="shop/contact">Contact Us</a>
@@ -64,6 +64,60 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
-   {% block js %} {% endblock %} 
+    <script>
+      if (localStorage.getItem('cart') == null) {
+          var cart = {}
+      }
+      else {
+          cart = JSON.parse(localStorage.getItem('cart'));
+          document.getElementById('cart').innerHTML = Object.keys(cart).length;
+          updateCart(cart);
+      }
+      $('.cart').click(function () {
+          var idstr = this.id.toString();
+          if (cart[idstr] != undefined) {
+              cart[idstr] = cart[idstr] + 1
+          }
+          else {
+              cart[idstr] = 1
+          }
+          updateCart(cart)
+          localStorage.setItem('cart', JSON.stringify(cart));
+      });
+  
+      // showing popover here
+      $('#popcart').popover();
+      document.getElementById('popcart').setAttribute('data-content', '<h5>Cart in the shopping website main containt of the year</cart>');
+  
+      // incriment and decriment product items
+      function updateCart(cart) {
+          for (var item in cart) {
+              // console.log(item)
+              document.getElementById('div' + item).innerHTML = "<button id='minus" + item + " ' class='btn btn-primary minus'>-</button> <span id='val" + item + " '> " + cart[item] + " </span><button id='plus" + item + " ' class='btn btn-primary plus'>+</button>";
+          }
+      }
+
+// clicking plus and minus button incriment and decriment 
+
+$('.divpr').on('click', 'button.minus', function () {
+  a = this.id.slice(7,);
+  cart['pr'+ a] = cart['pr'+ a] - 1;
+  cart['pr'+ a] = Math.max(0, cart['pr'+ a]);
+  document.getElementById('valpr' + a).innerHTML = cart['pr'+ a];
+  updateCart(cart);
+
+});
+
+$('.divpr').on('click', 'button.plus', function () {
+  a = this.id.slice(6,);
+  cart['pr'+ a] = cart['pr'+ a] + 1;
+  console.log(cart['pr' + a])
+  document.getElementById('valpr' + a).innerHTML = cart['pr'+ a];
+  updateCart(cart);
+
+});
+
+</script>
+{% block js %} {% endblock %} 
 </body>
 </html>

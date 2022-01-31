@@ -65,13 +65,16 @@
 
                     {% for i in product %}
                     <div class="col-xs-3 col-sm-3 col-md-3">
-                        <div class="card" style="width: 18rem">
+                        <div class="align-items-center card" style="width: 18rem">
                             <img src="/media/{{i.image}}" class="card-img-top" alt="..." />
                             <div class="card-body">
                                 <h5 class="card-title">{{i.product_name}}</h5>
                                 <p class="card-text">{{i.desc|slice:":50"}}...</p>
-                                <button id="pr{{i.id}}" class="btn btn-primary cart">Add To Cart</button>
-                                <a type="button" href="/shop/products/{{i.id}}" id="qv{{i.id}}" class="btn btn-primary cart"> Quick View </a>
+                                <span id="divpr{{i.id}}" class="divpr">
+                                    <button id="pr{{i.id}}" class="btn btn-primary cart">Add To Cart</button>
+                                </span>
+                                <a type="button" href="/shop/products/{{i.id}}" id="qv{{i.id}}"
+                                    class="btn btn-primary cart"> Quick View </a>
                             </div>
                         </div>
                     </div>
@@ -97,28 +100,5 @@
 </div>
 {% endblock %}
 {% block js %}
-<script>
-    if (localStorage.getItem('cart') == null) {
-        var cart = {}
-    }
-    else {
-        cart = JSON.parse(localStorage.getItem('cart'));
-        document.getElementById('cart').innerHTML = Object.keys(cart).length;
-    }
-    $('.cart').click(function () {
-        console.log('clicked');
-        var idstr = this.id.toString();
-        console.log(idstr);
-        if (cart[idstr] != undefined) {
-            cart[idstr] = cart[idstr] + 1;
-        }
-        else {
-            cart[idstr] = 1;
-        }
-        console.log(cart);
-        localStorage.setItem('cart', JSON.stringify(cart));
-    });
-    $('#popcart').popover();
-    document.getElementById('popcart').setAttribute('data-content', '<h5>Cart in the shopping website main containt of the year</cart>');
-</script>
+
 {% endblock %}

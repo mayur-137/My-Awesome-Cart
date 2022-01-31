@@ -2,7 +2,10 @@ from distutils.command.upload import upload
 from email.policy import default
 from django.db import models
 
+
 # Create your models here.
+
+
 class Product(models.Model):
     product_id = models.AutoField
     product_name = models.CharField(max_length=50)
@@ -14,4 +17,4 @@ class Product(models.Model):
     image = models.ImageField(upload_to="shop/images", default="")
 
     def __str__(self) -> str:
-        return self.product_name 
+        return self.product_name
