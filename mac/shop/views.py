@@ -19,7 +19,7 @@ def index(request):
     return render(request, 'shop/index.html', params)
 
 
-def About(request):
+def about(request):
     return render(request, 'shop/about.html')
 
 
@@ -27,12 +27,16 @@ def tracker(request):
     return render(request, 'shop/tracker.html')
 
 
-def products(request, myid):
-    product = Product.objects.filter(id=myid)
-    print(myid)
+def products(request, myId):
+    product = Product.objects.filter(id=myId)
+    print(myId)
     print(product)
     return render(request, 'shop/product.html', {'products': product[0]})
 
 
 def contact(request):
     return render(request, 'shop/contact.html')
+
+
+def checkout(request):
+    return render(request, 'shop/checkout.html')
